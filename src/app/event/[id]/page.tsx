@@ -1,5 +1,7 @@
 import * as api from "@/api/site";
 import { Search } from "@/components/site/Search";
+import { SearchForm } from "@/components/site/SearchForm";
+import { ToggleTheme } from "@/components/site/ThemeToggle";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { redirect } from "next/navigation";
@@ -13,6 +15,8 @@ const Page = async ( { params } : Props ) => {
 
 	return (
 		<main className="text-center mx-auto max-w-lg min-h-screen flex flex-col justify-center" >
+
+			<ToggleTheme />
 
 			<header>
 
