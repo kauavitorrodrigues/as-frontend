@@ -1,38 +1,78 @@
+"use client"
+
+import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
+import { z } from "zod"
+import { Button } from "../ui/button"
+import { Form, 
+    FormControl, 
+    FormField, 
+    FormItem, FormLabel, 
+    FormMessage 
+} from "../ui/form"
 import { Input } from "../ui/input"
+import { CircleUserRound } from "lucide-react"
+import { escapeCpf } from "@/utils/escapeCpf"
+
+const formSchema = z.object({
+  cpf: z.string()
+  .min(11, { message: "CPF deve ter 11 caracteres" })
+  .max(14, { message: "CPF deve ter no máximo 14 caracteres" }),
+})
 
 type Props = {
     onSearchButton: (cpf: string) => void
 }
 
-export const SearchForm = ({onSearchButton}: Props) => {
+export const SearchForm = ({ onSearchButton } : Props ) => {
 
-    const form = useForm()
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+          cpf: ""
+        },
+    })
+
+    const onSubmit = (data: z.infer<typeof formSchema>) => {
+        const { cpf } = data
+        onSearchButton(escapeCpf(cpf))
+    }
 
     return (
 
-        <FormField
+        <Form {...form}>
 
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-            <FormItem>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 
-                <FormLabel>Username</FormLabel>
+                <FormField
 
-                <FormControl>
-                    <Input placeholder="shadcn" {...field} />
-                </FormControl>
+                    control={form.control}
+                    name="cpf"
+                    render={({ field }) => (
 
-                <FormDescription>This is your public display name.</FormDescription>
-                <FormMessage />
+                        <FormItem>
 
-            </FormItem>
-            )}
+                            <FormLabel>CPF</FormLabel>
 
-        />
-        
+                            <FormControl>
+                                <Input placeholder="CPF" {...field} />
+                            </FormControl>
+                            
+                            <FormMessage />
+
+                        </FormItem>
+
+                    )}
+                />
+
+                <Button type="submit">
+                    <CircleUserRound className="mr-1" /> Entrar
+                </Button>
+
+            </form>
+
+      </Form>
+
     )
 
 }

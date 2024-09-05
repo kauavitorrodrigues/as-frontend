@@ -14,30 +14,25 @@ const Page = async ( { params } : Props ) => {
 	// if( !eventItem || !eventItem.status ) return redirect("/")
 
 	return (
-		<main className="text-center mx-auto max-w-lg min-h-screen flex flex-col justify-center" >
+		<main className="text-center items-center mx-auto max-w-lg min-h-screen flex flex-col justify-center gap-10" >
 
 			<ToggleTheme />
 
-			<header>
+			<header className="flex gap-3 flex-col">
 
 				<h1 className="text-3xl uppercase font-bold">Amigo Secreto</h1>
-
-				<Separator className="my-4" />
-
 				<h2>Título evento</h2>
 				<p>Descrição Evento</p>
 
 			</header>
 
-			<Separator className="my-4" />
+			<Search id={parseInt(params.id)} />
 
-			{/* <Search id={parseInt(params.id)} /> */}
-
-			<footer>Criado por Kauã Vitor</footer>
+			<footer className="text-xs">Criado por Kauã Vitor</footer>
 
 		</main>
 	)
 	
-}
+}	
 
 export default Page;
