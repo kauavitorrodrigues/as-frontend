@@ -55,7 +55,10 @@ export const SearchForm = ({ onSearchButton } : Props ) => {
                             <FormLabel>CPF</FormLabel>
 
                             <FormControl>
-                                <Input placeholder="CPF" {...field} />
+                                <Input 
+                                    autoFocus 
+                                    placeholder="CPF" {...field} 
+                                />
                             </FormControl>
                             
                             <FormMessage />
