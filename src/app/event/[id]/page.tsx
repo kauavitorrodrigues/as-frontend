@@ -1,6 +1,6 @@
 import * as api from "@/api/site";
 import { Search } from "@/components/site/Search";
-import { ToggleTheme } from "@/components/site/ThemeToggle";
+import { ToggleTheme } from "@/components/ThemeToggle";
 import { redirect } from "next/navigation";
 
 type Props = { params: { id: string } }
