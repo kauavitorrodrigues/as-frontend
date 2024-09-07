@@ -5,7 +5,7 @@ import { SearchResult } from "@/types/SearchResult"
 import { SearchForm } from "./SearchForm"
 import { SearchReveal } from "./SearchReveal"
 import * as api from "@/api/site"
-import { LoaderIcon } from "./LoaderIcon"
+import { LoaderIcon } from "../LoaderIcon"
 
 type Props = {
     eventId: number,
@@ -30,13 +30,12 @@ export const Search = ({ eventId }: Props) => {
     const handleSearchButton = async (cpf: string) => {
 
         setLoading(true)
+        
         let result = await api.searchCPF(eventId, cpf)
         if (!result) return alert("CPF inexistente") 
-        
-        setTimeout(() => {
-            setLoading(false)
-            setResults(tempRes)
-        }, 2000);
+
+        setLoading(false)
+        setResults(tempRes)
 
     }
 
@@ -49,7 +48,7 @@ export const Search = ({ eventId }: Props) => {
                 onSearchButton={handleSearchButton}/> 
             }
 
-            { loading && <LoaderIcon/> }
+            { loading && <LoaderIcon size={60}/> }
 
             { results && !loading && <SearchReveal results={results}/> }
     
