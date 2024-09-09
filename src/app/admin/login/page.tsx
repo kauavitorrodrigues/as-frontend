@@ -1,10 +1,7 @@
 "use client"
 
 import { LoginForm } from "@/components/admin/LoginForm";
-import {
-	Card,
-	CardContent
-  } from "@/components/ui/card"
+import { Card,CardContent} from "@/components/ui/card"
 import { useState } from "react";
 import * as api from "@/api/admin"
 import { LoaderIcon } from "@/components/LoaderIcon";
@@ -37,9 +34,9 @@ const Page = () => {
 
 	return (
 		
-		<div className="flex flex-col gap-5">
+		<main className="flex min-h-[calc(100vh-80px)] flex-col gap-5 items-center justify-center">
 
-			<div className="flex flex-col space-y-1.5">
+			<div className="space-y-1.5 w-full max-w-md flex flex-col justify-center">
 
 				<h1 className="text-2xl font-semibold leading-none tracking-tight">Formulário de Login</h1>
 				<p className="text-sm text-muted-foreground">Preencha os dados corretamente para acessar o painel</p>
@@ -56,7 +53,7 @@ const Page = () => {
 				</CardContent>
 			</Card>
 
-		</div>
+		</main>
 	)
 	
 }	

@@ -1,12 +1,14 @@
 import { getCookie } from "cookies-next"
-import { cookies } from "next/headers"
 import { req } from "./axios"
 
 const getAdminLoggedCookie = async () => {
 
-    const token = getCookie("token", { cookies })
+    const token = getCookie("token")
+    if (!token) {
+        throw new Error("Token não encontrado")
+    }
 
-    await req.get("/admin/ping", {
+    return req.get("/admin/ping", {
         headers: {
             "Authorization": `Token ${token}`
         }
@@ -16,9 +18,10 @@ const getAdminLoggedCookie = async () => {
 
 export const pingAdmin = async () => {
     try {
-        getAdminLoggedCookie()
+        await getAdminLoggedCookie()
         return true
-    } catch (err) { 
-        return false 
+    } catch (err) {
+        console.error("Erro de autenticação:", err)
+        return false
     }
 }

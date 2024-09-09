@@ -1,6 +1,6 @@
-import { ToggleTheme } from "@/components/ThemeToggle";
 import { Metadata } from "next";
 import { ReactNode } from "react";
+import { ToggleTheme } from "@/components/ToggleTheme";
 
 export const metadata: Metadata = {
     title: "Amigo Secreto | Admin"
@@ -8,22 +8,25 @@ export const metadata: Metadata = {
 
 type Props = { children: ReactNode }
 
-const Layout = ({ children } : Props ) => {
-
+const Layout = ({ children } : Props ) => { 
     return (
-        <div className="flex flex-col items-center min-h-screen gap-6">
+        
+        <div>
 
-            <header className="text-center flex flex-col w-full p-3 border-b">
-                <ToggleTheme />
-                <h1 className="text-2xl uppercase font-bold">Amigo Secreto</h1>
-                <h2>Painel de controle</h2>
+            <header className="pl-6 h-20 flex gap-4 text-center items-center">
+                <h1 className="text-2xl font-bold">Amigo Secreto</h1>
+                <ToggleTheme/>
             </header>
 
-            <main className="w-full max-w-3xl flex items-center justify-center flex-1">{children}</main>
+            <div className="flex min-h-[calc(100vh-80px)] w-full flex-col bg-muted/40">
+
+                {children}
+
+            </div>
 
         </div>
+        
     )
-
 }
 
 export default Layout;

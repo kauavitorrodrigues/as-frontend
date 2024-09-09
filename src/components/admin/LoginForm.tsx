@@ -14,7 +14,7 @@ import { Input } from "../ui/input"
 import { CircleUserRound } from "lucide-react"
 
 const formSchema = z.object({
-  password: z.string()
+  password: z.string().min(1, "A senha não pode estar vazia")
 })
 
 type Props = {
