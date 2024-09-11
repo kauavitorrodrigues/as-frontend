@@ -1,7 +1,8 @@
 "use client"
 
 import * as api from "@/api/admin";
-import { Dashboard } from "@/components/admin/Dashboard";
+import { Dashboard } from "@/components/admin/dashboard/Dashboard";
+import { FilterProvider } from "@/contexts/filterContext";
 import { Event } from "@/types/Event";
 import { useEffect, useState } from "react";
 
@@ -16,16 +17,21 @@ export const AdminPage = () => {
 		setEvents(eventList)
 		setLoading(false)
 	}
-
+	
 	useEffect(() => {
 		loadEvents()
 	}, []);
 
 	return (
-		<Dashboard 
-			events={events}
-			loading={loading}
-		/>
+
+		<FilterProvider> 
+			
+			<Dashboard 
+				events={events}
+				loading={loading}
+			/>
+
+		</FilterProvider>
 	)
 	
 }	

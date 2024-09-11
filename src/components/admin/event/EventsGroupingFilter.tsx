@@ -7,26 +7,12 @@ import {
     DropdownMenuTrigger } 
 from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
+import {ListFilter } from "lucide-react"
+import { useFilter } from "@/contexts/filterContext"
 
-import {
-    ListFilter
-} from "lucide-react"
-import { useState } from "react"
+export const EventsGroupingFilter = () => {
 
-type Props = {
-    onFilterByGrouping: (value: "default" | "grouped" | "ungrouped") => void
-}
-
-
-export const EventsGroupingFilter = ({ onFilterByGrouping } : Props) => {
-
-
-    const [selectedFilter, setSelectedFilter] = useState<"default" | "grouped" | "ungrouped">("default");
-
-    const handleSelectGroupFilter = (value: "default" | "grouped" | "ungrouped") => {
-        onFilterByGrouping(value)
-        setSelectedFilter(value)
-    }
+    const { filter, filterByGrouping } = useFilter()
 
     return (
 
@@ -52,20 +38,20 @@ export const EventsGroupingFilter = ({ onFilterByGrouping } : Props) => {
                     <DropdownMenuSeparator/>
 
                     <DropdownMenuCheckboxItem
-                        onClick={() => handleSelectGroupFilter("default")} 
-                        checked={selectedFilter === "default"}
+                        onClick={() => filterByGrouping("default")} 
+                        checked={filter.grouping === "default"}
                         >Padrão
                     </DropdownMenuCheckboxItem>
 
                     <DropdownMenuCheckboxItem
-                        onClick={() => handleSelectGroupFilter("grouped")} 
-                        checked={selectedFilter === "grouped"}
+                        onClick={() => filterByGrouping("grouped")} 
+                        checked={filter.grouping === "grouped"}
                         >Sim
                     </DropdownMenuCheckboxItem>
 
                     <DropdownMenuCheckboxItem
-                        onClick={() => handleSelectGroupFilter("ungrouped")} 
-                        checked={selectedFilter === "ungrouped"}
+                        onClick={() => filterByGrouping("ungrouped")} 
+                        checked={filter.grouping === "ungrouped"}
                         >Não
                     </DropdownMenuCheckboxItem>
 

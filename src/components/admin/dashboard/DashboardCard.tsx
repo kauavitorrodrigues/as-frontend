@@ -1,7 +1,7 @@
 import { Card,CardContent,CardDescription,CardFooter,CardHeader,CardTitle,
 } from "@/components/ui/card"
-import { DashboardEventsTable } from "./DashboardEventsTable"
 import { Event } from "@/types/Event"
+import { DashboardEventsTable } from "./DashboardEventsTable"
 
 type Props = {
     events: Event[]
