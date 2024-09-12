@@ -22,3 +22,11 @@ export const getEvents = async () => {
     })
     return json.data.events as Event[] ?? []
 }
+
+export const deleteEvent = async (id: number) => {
+    const token = "11121344123"
+    const json = await req.delete(`/admin/events/${id}`, {
+        headers: { "Authorization": `Token ${token}` }
+    })
+    return !json.data.error
+}

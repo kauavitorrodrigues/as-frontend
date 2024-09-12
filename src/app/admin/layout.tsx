@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { ReactNode } from "react";
 import { ToggleTheme } from "@/components/ToggleTheme";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
     title: "Amigo Secreto | Admin"
@@ -19,9 +20,8 @@ const Layout = ({ children } : Props ) => {
             </header>
 
             <div className="flex min-h-[calc(100vh-80px)] w-full flex-col bg-muted/40">
-
                 {children}
-
+                <Toaster />
             </div>
 
         </div>

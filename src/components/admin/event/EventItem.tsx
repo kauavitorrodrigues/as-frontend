@@ -1,11 +1,8 @@
 import { Event } from "@/types/Event"
 import { TableCell, TableRow } from "../../ui/table"
-import { PencilRuler } from "lucide-react"
-import { DropdownMenu } from "@radix-ui/react-dropdown-menu"
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "../../ui/dropdown-menu"
-import { Button } from "../../ui/button"
 import { Badge } from "../../ui/badge"
 import { EventLinkButton } from "./EventLinkButton"
+import { EventActions } from "./EventActions"
 
 type Props = {
     event: Event
@@ -52,31 +49,7 @@ export const EventItem = ({event} : Props) => {
             </TableCell>
 
             <TableCell>
-
-                <DropdownMenu>
-
-                <DropdownMenuTrigger asChild>
-
-                    <Button
-                        aria-haspopup="true"
-                        size="icon"
-                        variant="ghost"
-                    >   <PencilRuler className="h-4 w-4" />
-                        <span className="sr-only">Toggle menu</span>
-                    </Button>
-
-                </DropdownMenuTrigger>
-
-                <DropdownMenuContent align="end">
-
-                    <DropdownMenuLabel>Ações</DropdownMenuLabel>
-                    <DropdownMenuItem>Editar</DropdownMenuItem>
-                    <DropdownMenuItem>Excluir</DropdownMenuItem>
-
-                </DropdownMenuContent>
-
-                </DropdownMenu>
-
+                <EventActions event={event} />
             </TableCell>
 
         </TableRow>
