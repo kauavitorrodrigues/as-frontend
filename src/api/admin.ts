@@ -24,9 +24,23 @@ export const getEvents = async () => {
 }
 
 export const deleteEvent = async (id: number) => {
-    const token = "11121344123"
+    const token = getCookie("token")
     const json = await req.delete(`/admin/events/${id}`, {
         headers: { "Authorization": `Token ${token}` }
     })
     return !json.data.error
+}
+
+export type AddEventData = {
+    tittle: string,
+    description: string,
+    grouped: boolean
+}
+
+export const createEvent = async (data: AddEventData): Promise<Event | false >=> {
+    const token = getCookie("token")
+    const json = await req.post(`/admin/events`, data, {
+        headers: { "Authorization": `Token ${token}` }
+    })
+    return json.data.event as Event ?? false
 }

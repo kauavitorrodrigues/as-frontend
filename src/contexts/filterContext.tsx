@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 import { FilterActions, filterReducer, initialFilter } from '@/reducers/filterReducer';
 import { EventsFilter } from '@/types/EventsFilters';
 
-interface FilterContextType {
+type FilterContextType = {
     filter: EventsFilter;
     dispatch: React.Dispatch<FilterActions>;
     filterByStatus: (value: string) => void;
