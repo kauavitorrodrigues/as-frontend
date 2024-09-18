@@ -4,7 +4,8 @@ import * as api from "@/api/admin"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import { toast } from "@/hooks/use-toast"
+import { useEvents } from "@/contexts/eventsContext"
+import { useDisplayAlertToast } from "@/hooks/useDisplayAlertToast"
 import { Event } from "@/types/Event"
 import { Trash2 } from "lucide-react"
 
@@ -13,32 +14,22 @@ type Props = {
 }
 
 export const EventDeleteModal = ({ event } : Props ) => {
-    
-    const displayToastForRequestOutcome = (isSuccess: boolean) => {
-        toast({
-            title: isSuccess ? "Sucesso!" : "Ops! Algo deu errado.",
-            variant: isSuccess ? "default" : "destructive",
-            description: isSuccess
-            ? "Evento excluído com sucesso."
-            : "Houve um problema com a exclusão, tente novamente mais tarde.",
-        });
-    }
 
-    const displayToastForRequestError = () => {
-        toast({
-            title: "Ops! Algo deu errado.",
-            variant: "destructive",
-            description: "Houve um problema com a exclusão.",
-        });
-    }
+    const eventContext = useEvents()
 
     const handleDeleteButton = async (event: Event) => { 
         
         try {
             const isSuccess = await api.deleteEvent(event.id)
-            displayToastForRequestOutcome(isSuccess)
+            useDisplayAlertToast(
+                isSuccess, 
+                "Evento excluído com sucesso.",
+                "Houve um problema com a exclusão, tente novamente mais tarde."
+            )
         } catch (error) {
-            displayToastForRequestError()
+            useDisplayAlertToast(false)
+        } finally {
+            eventContext.fetchEvents()
         }
 
     }

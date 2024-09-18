@@ -1,20 +1,12 @@
 import { Tabs,TabsContent } from "@/components/ui/tabs"
-import { Event } from "@/types/Event"
-import { useFilteredEvents } from "@/hooks/useFilteredEvents"
 import { useFilter } from "@/contexts/filterContext"
 import { DashboardFilters } from "./DashboardFilters"
 import { DashboardCard } from "./DashboardCard"
 import { EventCreateModal } from "../event/EventCreateModal"
 
-type Props = {
-    events: Event[]
-    loading: boolean
-}
-
-export const Dashboard = ({ events, loading } : Props ) => {
+export const Dashboard = () => {
 
     const { filter, filterByStatus } = useFilter();
-    const filteredEvents = useFilteredEvents(events)
 
     const handleStatusFilter = (value: string) => {
         filterByStatus(value);
@@ -32,10 +24,9 @@ export const Dashboard = ({ events, loading } : Props ) => {
                 </div>
 
                 <TabsContent className="mt-6" value={filter.status}> 
-                    <DashboardCard 
-                        events={filteredEvents} 
-                        loading={loading}/>
+                    <DashboardCard/>
                 </TabsContent>
+
             </Tabs>
 
         </main>

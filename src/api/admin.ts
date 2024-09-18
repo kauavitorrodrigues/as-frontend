@@ -37,10 +37,10 @@ export type AddEventData = {
     grouped: boolean
 }
 
-export const createEvent = async (data: AddEventData): Promise<Event | false >=> {
+export const createEvent = async (data: AddEventData) => {
     const token = getCookie("token")
     const json = await req.post(`/admin/events`, data, {
         headers: { "Authorization": `Token ${token}` }
     })
-    return json.data.event as Event ?? false
+    return !!json.data.event
 }

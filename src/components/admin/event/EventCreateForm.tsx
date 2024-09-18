@@ -4,19 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
-import { Form, 
-    FormControl, 
-    FormField, 
-    FormItem, FormLabel, 
-    FormMessage 
-} from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Check } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
-import { toast } from "@/hooks/use-toast"
 import * as api from "@/api/admin"
-import { Event } from "@/types/Event"
 import { useState } from "react"
+import { useDisplayAlertToast } from "@/hooks/useDisplayAlertToast"
+import { useEvents } from "@/contexts/eventsContext"
 
 const formSchema = z.object({
     tittle: z.string().min(1, "O título não pode estar vazio"),
@@ -27,6 +22,7 @@ const formSchema = z.object({
 export const EventCreateForm = () => {
 
     const [ loading, setLoading ] = useState(false)
+    const { fetchEvents } = useEvents()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -36,39 +32,29 @@ export const EventCreateForm = () => {
             grouped: false
         },
     })
-
-    const displayToastForRequestOutcome = (isSuccess: false | Event ) => {
-        toast({
-            title: isSuccess ? "Sucesso!" : "Ops! Algo deu errado.",
-            variant: isSuccess ? "default" : "destructive",
-            description: isSuccess
-            ? "Evento criado com sucesso."
-            : "Houve um problema ao criar o evento, tente novamente mais tarde.",
-        });
-    }
-
-    const displayToastForRequestError = () => {
-        toast({
-            title: "Ops! Algo deu errado.",
-            variant: "destructive",
-            description: "Houve um problema ao criar o evento.",
-        });
-    }
     
     const createEvent = async (data: api.AddEventData) => {
         
         try {
             const isSuccess = await api.createEvent(data)
-            displayToastForRequestOutcome(isSuccess)
-        } catch (error) {
-            displayToastForRequestError()
-        }
 
+            useDisplayAlertToast(
+                isSuccess,
+                "Evento criado com sucesso.",
+                "Houve um problema ao criar o evento, tente novamente mais tarde."
+            )
+
+            isSuccess && fetchEvents()
+
+        } catch (error) {
+            useDisplayAlertToast(false)
+        }
+        
 	}
 
     const handleCreateEvent = async (data: api.AddEventData) => {
         setLoading(true)
-		createEvent(data)
+		await createEvent(data)
 		setLoading(false)
     }
 

@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 
 const Page = async () => {
 
-	const logged = await api.pingAdmin()
-	if (!logged) return redirect("/admin/login")
+	// const logged = await api.pingAdmin()
+	// if (!logged) return redirect("/admin/login")
 
 	return <AdminPage/>
 	

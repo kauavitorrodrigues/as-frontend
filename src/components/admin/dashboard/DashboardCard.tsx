@@ -1,14 +1,14 @@
 import { Card,CardContent,CardDescription,CardFooter,CardHeader,CardTitle,
 } from "@/components/ui/card"
-import { Event } from "@/types/Event"
+import { NotFoundEvents } from "./NotFoundEvents"
+import { useEvents } from "@/contexts/eventsContext"
+import { DashboardEventsSkeleton } from "./DashboardEventsSkeleton"
 import { DashboardEventsTable } from "./DashboardEventsTable"
 
-type Props = {
-    events: Event[]
-    loading: boolean
-}
+export const DashboardCard = () => {
 
-export const DashboardCard = ({ events, loading } : Props) => {
+    const { events, loading } = useEvents()
+
     return (
         <Card x-chunk="dashboard-06-chunk-0">
 
@@ -20,20 +20,18 @@ export const DashboardCard = ({ events, loading } : Props) => {
             </CardHeader>
 
             <CardContent>
-                
-                <DashboardEventsTable 
-                    events={events} 
-                    loading={loading}
-                />
-
+                { loading && <DashboardEventsSkeleton/>}
+                { !loading && events.length > 0 && <DashboardEventsTable events={events} /> }
+                { !loading && events.length <= 0 && <NotFoundEvents /> }
             </CardContent>
 
-            <CardFooter>
-                <div className="text-xs text-muted-foreground">
-                    Mostrando <strong>1-10</strong> de <strong>{events.length}</strong>{" "}
-                    eventos
-                </div>
-            </CardFooter>
+            { !loading && events.length > 0 && 
+                <CardFooter>
+                    <div className="text-xs text-muted-foreground">
+                        <p>Mostrando <strong>1-10</strong> de <strong></strong>{events.length} eventos</p>
+                    </div>
+                </CardFooter>
+            }
 
         </Card>        
     )

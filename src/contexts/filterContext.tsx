@@ -29,7 +29,8 @@ export const FilterProvider = ({ children} : Props ) => {
         
     }
 
-    const filterByGrouping = (grouping: "default" | "grouped" | "ungrouped") => {
+    type Grouping = "default" | "grouped" | "ungrouped";
+    const filterByGrouping = (grouping: Grouping) => {
         dispatch({ type: "grouping", payload: grouping })
     }
 
@@ -46,7 +47,7 @@ export const FilterProvider = ({ children} : Props ) => {
 export const useFilter = () : FilterContextType => {
     const context = useContext(FilterContext);
     if (!context) {
-        throw new Error('useFilter must be used within a FilterProvider');
+        throw new Error('useFilter deve ser usado com um FilterProvider');
     }
     return context;
 };

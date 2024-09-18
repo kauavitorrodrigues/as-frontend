@@ -1,13 +1,8 @@
+import { EventItemSkeleton } from "../event/EventItemSkeleton"
 import { Table, TableBody } from "@/components/ui/table"
 import { DashboardEventsTableHeader } from "./DashboardEventsTableHeader"
-import { EventItem } from "../event/EventItem"
-import { Event } from "@/types/Event"
 
-type Props = {
-    events: Event[]
-}
-
-export const DashboardEventsTable = ({events} : Props) => {
+export const DashboardEventsSkeleton = () => {
 
     return (
     
@@ -17,8 +12,8 @@ export const DashboardEventsTable = ({events} : Props) => {
     
             <TableBody>
     
-                { events.map(event => (
-                    <EventItem event={event} />
+                { Array.from({ length: 10 }, (key, index) => (
+                    <EventItemSkeleton key={index} />
                 ))}
     
             </TableBody>

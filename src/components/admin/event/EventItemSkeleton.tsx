@@ -14,7 +14,7 @@ export const EventItemSkeleton = () => {
             </TableCell>
 
             <TableCell className="hidden md:table-cell max-w-72">
-                <Skeleton className="h-8 w-full min-w-64"/>
+                <Skeleton className="h-8 w-full min-w-60"/>
             </TableCell>
 
             <TableCell className="text-center max-w-20">
@@ -25,10 +25,10 @@ export const EventItemSkeleton = () => {
                 <Skeleton className="h-8 mx-auto max-w-20 rounded-full"/>
             </TableCell>
 
-            <TableCell className="text-center max-w-20">
-                <Skeleton className="h-8 mx-auto max-w-20 rounded-full"/>
+            <TableCell className="flex justify-center">
+                <Skeleton className="h-8 w-8"/>
             </TableCell>
-
+            
             <TableCell>
                 <Skeleton className="h-8 max-w-8 flex-1"/>
             </TableCell>
