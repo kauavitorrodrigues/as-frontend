@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { PlusCircle } from "lucide-react"
-import { EventCreateForm } from "./EventCreateForm"
+import { EventCreateForm } from "../EventCreateForm"
 
 export function EventCreateModal() {
 

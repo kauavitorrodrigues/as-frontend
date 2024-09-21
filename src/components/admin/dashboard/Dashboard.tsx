@@ -2,7 +2,7 @@ import { Tabs,TabsContent } from "@/components/ui/tabs"
 import { useFilter } from "@/contexts/filterContext"
 import { DashboardFilters } from "./DashboardFilters"
 import { DashboardCard } from "./DashboardCard"
-import { EventCreateModal } from "../event/EventCreateModal"
+import { EventCreateModal } from "../event/modals/EventCreateModal"
 
 export const Dashboard = () => {
 

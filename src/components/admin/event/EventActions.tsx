@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { PencilRuler } from "lucide-react"
-import { EventEditModal } from "./EventEditModal"
-import { EventDeleteModal } from "./EventDeleteModal"
+import { EventEditModal } from "./modals/EventEditModal"
+import { EventDeleteModal } from "./modals/EventDeleteModal"
 import { Event } from "@/types/Event"
 
 type Props = {

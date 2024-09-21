@@ -67,3 +67,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .scrollbar {
+    scrollbar-width: thin;
+  }
+  .scrollbar::-webkit-scrollbar {
+    scrollbar-width: thin;
+  }
+}

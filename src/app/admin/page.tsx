@@ -4,11 +4,19 @@ import { redirect } from "next/navigation";
 
 const Page = async () => {
 
-	// const logged = await api.pingAdmin()
-	// if (!logged) return redirect("/admin/login")
+	try {
+		if (process.env.NODE_ENV === 'development') {
+			return <AdminPage/>
+		} else {
+			const isAdminLoggedIn  = await api.pingAdmin()
+			if (!isAdminLoggedIn ) return redirect("/admin/login")
+			return <AdminPage/>
+		}
+	} catch (error) {
+		console.error("Erro ao verificar o login do administrador:", error)
+        return redirect("/")
+	}
 
-	return <AdminPage/>
-	
 }	
 
 export default Page;

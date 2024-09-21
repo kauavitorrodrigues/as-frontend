@@ -1,5 +1,5 @@
 import React, { createContext, useContext, ReactNode, useEffect, useState } from 'react';
-import { mockEvents } from '@/api/eventsMock';
+import { mockEvents } from '@/api/MockData';
 import { Event } from '@/types/Event';
 import * as api from "@/api/admin";
 
