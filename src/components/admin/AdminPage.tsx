@@ -8,11 +8,11 @@ export const AdminPage = () => {
 	
 	return (
 		
-		<EventsProvider>
-			<FilterProvider> 
-				<Dashboard/>
+			<FilterProvider>
+				<EventsProvider>
+						<Dashboard/>
+				</EventsProvider>
 			</FilterProvider>
-		</EventsProvider>
 	)
 	
 }

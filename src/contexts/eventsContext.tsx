@@ -1,20 +1,23 @@
 import React, { createContext, useContext, ReactNode, useEffect, useState } from 'react';
-import { mockEvents } from '@/api/MockData';
+import { useFilter } from '@/contexts/filterContext';
+import { mockEvents } from '@/api/mockData';
 import { Event } from '@/types/Event';
 import * as api from "@/api/admin";
 
 type EventContextType = {
-    events: Event[];
-    loading: boolean;
-    fetchEvents: () => void;
+    events: Event[]
+    loading: boolean
+    fetchEvents: () => void
+    filteredEvents: Event[]
 }
 
-const EventsContext = createContext<EventContextType | undefined>(undefined);
+const EventsContext = createContext<EventContextType | undefined>(undefined)
 
 type Props = { children: ReactNode }
 
 export const EventsProvider = ({ children} : Props ) => {
 
+    const { filter } = useFilter()
 	const [ events, setEvents ] = useState<Event[]>([])
     const [ loading, setLoading ] = useState(false)
 
@@ -26,7 +29,7 @@ export const EventsProvider = ({ children} : Props ) => {
             setTimeout(() => {
                 setEvents(mockEvents)    
                 setLoading(false)
-            }, 1000);
+            }, 1000)
         } else {
             const eventList = await api.getEvents()
             setEvents(eventList)
@@ -37,26 +40,38 @@ export const EventsProvider = ({ children} : Props ) => {
 	
 	useEffect(() => {
 		fetchEvents()
-	}, []);
+	}, [])
+
+    const filteredEvents = events.filter(event => {
+        const statusMatch = 
+            filter.status === "all" || 
+            (filter.status === "active" ? event.status : !event.status)
+    
+        const groupingMatch = 
+            filter.grouping === "default" || 
+            (filter.grouping === "grouped" ? event.grouped : !event.grouped)
+    
+        return statusMatch && groupingMatch
+    })
 
     return (
 
-        <EventsContext.Provider value={{  events, fetchEvents, loading }}>
+        <EventsContext.Provider value={{  events, fetchEvents, loading, filteredEvents }}>
             {children}
         </EventsContext.Provider>
 
-    );
+    )
 
-};
+}
 
 export const useEvents = () : EventContextType  => {
 
-    const context = useContext(EventsContext);
+    const context = useContext(EventsContext)
 
     if (!context) {
-        throw new Error('useFetchEvents deve ser usado com um EventsProvider');
+        throw new Error('useFetchEvents deve ser usado com um EventsProvider')
     }
 
     return context
 
-};
+}

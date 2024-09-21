@@ -7,7 +7,7 @@ import { DashboardEventsTable } from "./DashboardEventsTable"
 
 export const DashboardCard = () => {
 
-    const { events, loading } = useEvents()
+    const { filteredEvents, loading } = useEvents()
 
     return (
         <Card x-chunk="dashboard-06-chunk-0">
@@ -21,14 +21,14 @@ export const DashboardCard = () => {
 
             <CardContent>
                 { loading && <DashboardEventsSkeleton/>}
-                { !loading && events.length > 0 && <DashboardEventsTable events={events} /> }
-                { !loading && events.length <= 0 && <NotFoundEvents /> }
+                { !loading && filteredEvents.length > 0 && <DashboardEventsTable events={filteredEvents} /> }
+                { !loading && filteredEvents.length <= 0 && <NotFoundEvents /> }
             </CardContent>
 
-            { !loading && events.length > 0 && 
+            { !loading && filteredEvents.length > 0 && 
                 <CardFooter>
                     <div className="text-xs text-muted-foreground">
-                        <p>Mostrando <strong>1-10</strong> de <strong></strong>{events.length} eventos</p>
+                        <p>Mostrando <strong>1-10</strong> de <strong></strong>{filteredEvents.length} eventos</p>
                     </div>
                 </CardFooter>
             }
