@@ -44,7 +44,7 @@ export const AddGroupForm = ({ event, refreshGroups } : Props ) => {
             useDisplayAlertToast(
                 ( createdGroup ? true : false ),
                 "Grupo criado com sucesso.",
-                "Houve um problema ao criar o grupo, tente novamente mais tarde."
+                "O novo grupo foi criado com sucesso!"
             )
 
             createdGroup && refreshGroups()

@@ -27,7 +27,7 @@ export const PersonItem = ({ person, event, group, refreshPeople } : Props ) => 
             useDisplayAlertToast(
                 isSuccess,
                 "Pessoa excluída com sucesso.",
-                "Houve um problema ao excluir a pessoa, tente novamente mais tarde."
+                "Sucesso ao excluir a pessoa!"
             )
         } catch (error) {
             useDisplayAlertToast(false)

@@ -20,7 +20,7 @@ import { Card, CardContent } from "../ui/card"
 import { toast } from "@/hooks/use-toast"
 
 const formSchema = z.object({
-  password: z.string().min(1, "A senha não pode estar vazia")
+    password: z.string().min(1, "A senha não pode estar vazia")
 })
 
 export const LoginForm = () => {

@@ -1,18 +1,10 @@
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-  } from "@/components/ui/select"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue,
+} from "@/components/ui/select"
 import { Group } from "@/types/Group"
 import { useEffect, useState } from "react"
 import { NotFoundGroups } from "./NotFoundGroups"
 import { Event } from "@/types/Event"
 import * as api from "@/api/admin"
-import { mockGroups } from "@/api/mockData"
 import { LoaderIcon } from "@/components/LoaderIcon"
 
 type Props = {
@@ -29,16 +21,9 @@ export const GroupSelect = ({ event, onSelectGroup } : Props ) => {
         
         setLoading(true)
 
-        if (process.env.NODE_ENV === 'development') {
-            setTimeout(() => {
-                setGroups(mockGroups)    
-                setLoading(false)
-            }, 1000);
-        } else {
-            const groupList = await api.getGroups(event.id)
-            setLoading(false)
-            setGroups(groupList)
-        }
+        const groupList = await api.getGroups(event.id)
+        setLoading(false)
+        setGroups(groupList)
 
     }
 

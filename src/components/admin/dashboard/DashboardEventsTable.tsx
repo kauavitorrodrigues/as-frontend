@@ -18,7 +18,7 @@ export const DashboardEventsTable = ({events} : Props) => {
             <TableBody>
     
                 { events.map(event => (
-                    <EventItem event={event} />
+                    <EventItem event={event} key={event.id} />
                 ))}
     
             </TableBody>

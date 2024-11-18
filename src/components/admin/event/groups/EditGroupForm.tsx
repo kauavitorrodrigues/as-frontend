@@ -47,7 +47,7 @@ export const EditGroupForm = ({ event, group, refreshGroups } : Props ) => {
             useDisplayAlertToast(
                 ( updatedGroup ? true : false ),
                 "Grupo atualizado com sucesso.",
-                "Houve um problema ao atualizar o grupo, tente novamente mais tarde."
+                "O grupo foi atualizado com sucesso.",
             )
 
             if (updatedGroup) refreshGroups()

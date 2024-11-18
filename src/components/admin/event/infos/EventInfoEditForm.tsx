@@ -25,7 +25,7 @@ const formSchema = z.object({
     title: z.string().min(1, "O título não pode estar vazio"),
     description: z.string().min(1, "A descrição não pode estar vazia"),
     grouped: z.boolean(),
-    active: z.boolean()
+    status: z.boolean()
 })
 
 type Props = {
@@ -43,7 +43,7 @@ export const EventInfoEditForm = ({ event } : Props ) => {
             title: event.title,
             description: event.description,
             grouped: event.grouped,
-            active: event.status
+            status: event.status
         },
     })
     
@@ -54,8 +54,8 @@ export const EventInfoEditForm = ({ event } : Props ) => {
 
             useDisplayAlertToast(
                 isSuccess,
-                "Evento atualizado com sucesso.",
-                "Houve um problema ao editar o evento, tente novamente mais tarde."
+                "Houve um problema ao atualizar o evento. Tente novamente mais tarde.",
+                "Seu evento foi atualizado com sucesso!"
             )
 
             isSuccess && fetchEvents()
@@ -174,7 +174,7 @@ export const EventInfoEditForm = ({ event } : Props ) => {
 
                         <FormField
                             control={form.control}
-                            name="active"
+                            name="status"
                             render={({ field }) => (
 
                                 <FormItem>

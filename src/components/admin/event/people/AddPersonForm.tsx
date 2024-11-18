@@ -52,7 +52,7 @@ export const AddPersonForm = ({ event, group, refreshPeople } : Props ) => {
             useDisplayAlertToast(
                 ( createdPerson ? true : false ),
                 "Pessoa criada com sucesso.",
-                "Houve um problema ao criar a pessoa, tente novamente mais tarde."
+                "Sucesso ao criar a pessoa!."
             )
 
             createdPerson && refreshPeople()

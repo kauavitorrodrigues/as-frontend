@@ -24,7 +24,7 @@ export const EventDeleteModal = ({ event } : Props ) => {
             useDisplayAlertToast(
                 isSuccess, 
                 "Evento excluído com sucesso.",
-                "Houve um problema com a exclusão, tente novamente mais tarde."
+                "O evento foi excluído com sucesso."
             )
         } catch (error) {
             useDisplayAlertToast(false)

@@ -8,7 +8,6 @@ import { GroupSelect } from "../groups/GroupSelect"
 import { PersonComplete } from "@/types/PersonComplete"
 import * as api from "@/api/admin"
 import { PersonItem } from "./PersonItem"
-import { mockPeople } from "@/api/mockData"
 import { AddPersonForm } from "./AddPersonForm"
 import { LoaderIcon } from "@/components/LoaderIcon"
 import { NotFoundPerson } from "./NotFoundPerson"
@@ -28,18 +27,9 @@ export const PeopleTabs = ({ event } : Props ) => {
         if (selectedGroup === null) return
 
         setLoading(true)
-
-        if (process.env.NODE_ENV === 'development') {
-            setTimeout(() => {
-                setPeople(mockPeople)    
-                setLoading(false)
-            }, 1000);
-        } else {
-            setPeople([])
-            const peopleList = await api.getPeople(event.id, selectedGroup.id)
-            setLoading(false)
-            setPeople(peopleList)
-        }
+        const peopleList = await api.getPeople(event.id, selectedGroup.id)
+        setLoading(false)
+        setPeople(peopleList)
 
     }
 

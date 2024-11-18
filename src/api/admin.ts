@@ -4,14 +4,10 @@ import { Event } from "@/types/Event"
 import { Group } from "@/types/Group"
 import { PersonComplete } from "@/types/PersonComplete"
 
-const logUserIn = async (password: string) => {
-    const json = await req.post("/admin/login", {password})
-    return json.data.token as string ?? false
-}
-
 export const login = async (password: string) => {
     try {
-        logUserIn(password)
+        const json = await req.post("/admin/login", {password})
+        return json.data.token as string ?? false
     } catch (err) { 
         return false 
     }    
@@ -20,7 +16,7 @@ export const login = async (password: string) => {
 export const getEvents = async () => {
     const token = getCookie("token")
     const json = await req.get("/admin/events", {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
     return json.data.events as Event[] ?? []
 }
@@ -28,13 +24,13 @@ export const getEvents = async () => {
 export const deleteEvent = async (id: number) => {
     const token = getCookie("token")
     const json = await req.delete(`/admin/events/${id}`, {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
     return !json.data.error
 }
 
 export type AddEventData = {
-    tittle: string,
+    title: string,
     description: string,
     grouped: boolean
 }
@@ -42,7 +38,7 @@ export type AddEventData = {
 export const createEvent = async (data: AddEventData) => {
     const token = getCookie("token")
     const json = await req.post(`/admin/events`, data, {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
     return !!json.data.event
 }
@@ -57,7 +53,7 @@ export type UpdateEventData = {
 export const updateEvent = async (id: number, data: UpdateEventData) => {
     const token = getCookie("token")
     const json = await req.put(`/admin/events/${id}`, data, {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
     return !!json.data.event
 }
@@ -67,9 +63,9 @@ export const updateEvent = async (id: number, data: UpdateEventData) => {
 export const getGroups = async(eventId: number) => {
     const token = getCookie("token")
     const json = await req.get(`/admin/events/${eventId}/groups`, {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
-    return json.data.event as Group[] ?? []
+    return json.data.groups as Group[] ?? []
 }
 
 export type AddGroupData = { name: string }
@@ -77,7 +73,7 @@ export type AddGroupData = { name: string }
 export const addGroup = async(eventId: number, data: AddGroupData) => {
     const token = getCookie("token")
     const json = await req.post(`/admin/events/${eventId}/groups`, data, {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
     return json.data.group as Group ?? false
 }
@@ -87,7 +83,7 @@ export type UpdateGroupData = { name: string }
 export const updateGroup = async(eventId: number, groupId: number, data: UpdateGroupData) => {
     const token = getCookie("token")
     const json = await req.put(`/admin/events/${eventId}/groups/${groupId}`, data, {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
     return json.data.group as Group ?? false
 }
@@ -95,7 +91,7 @@ export const updateGroup = async(eventId: number, groupId: number, data: UpdateG
 export const deleteGroup = async(eventId: number, groupId: number) => {
     const token = getCookie("token")
     const json = await req.delete(`/admin/events/${eventId}/groups/${groupId}`, {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
     return !json.data.error
 }
@@ -105,7 +101,7 @@ export const deleteGroup = async(eventId: number, groupId: number) => {
 export const getPeople = async(eventId: number, groupId: number) => {
     const token = getCookie("token")
     const json = await req.get(`/admin/events/${eventId}/groups/${groupId}/people`, {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
     return json.data.people as PersonComplete[] ?? []
 }
@@ -118,7 +114,7 @@ export type AddPersonData = {
 export const addPerson = async(eventId: number, groupId: number, data: AddPersonData) => {
     const token = getCookie("token")
     const json = await req.post(`/admin/events/${eventId}/groups/${groupId}/people`, data, {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
     return json.data.person as PersonComplete ?? false
 }
@@ -131,7 +127,7 @@ export type UpdatePersonData = {
 export const updatePerson = async(eventId: number, groupId: number, id: number, data: UpdatePersonData) => {
     const token = getCookie("token")
     const json = await req.put(`/admin/events/${eventId}/groups/${groupId}/people/${id}`, data, {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
     return json.data.person as PersonComplete ?? false
 }
@@ -139,7 +135,7 @@ export const updatePerson = async(eventId: number, groupId: number, id: number, 
 export const deletePerson = async(eventId: number, id: number, groupId: number) => {
     const token = getCookie("token")
     const json = await req.delete(`/admin/events/${eventId}/groups/${groupId}/people/${id}`, {
-        headers: { "Authorization": `Token ${token}` }
+        headers: { "Authorization": `Bearer ${token}` }
     })
     return !json.data.error
 }

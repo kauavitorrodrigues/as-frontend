@@ -6,7 +6,6 @@ import { Group } from "@/types/Group"
 import { NotFoundGroups } from "./NotFoundGroups"
 import { AddGroupForm } from "./AddGroupForm"
 import { GroupItem } from "./GroupItem"
-import { mockGroups } from "@/api/mockData"
 import * as api from "@/api/admin"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { LoaderIcon } from "@/components/LoaderIcon"
@@ -24,16 +23,9 @@ export const GroupTabs = ({ event } : Props ) => {
 
         setLoading(true)
 
-        if (process.env.NODE_ENV === 'development') {
-            setTimeout(() => {
-                setGroups(mockGroups)    
-                setLoading(false)
-            }, 1000);
-        } else {
-            const groupList = await api.getGroups(event.id)
-            setLoading(false)
-            setGroups(groupList)
-        }
+        const groupList = await api.getGroups(event.id)
+        setLoading(false)
+        setGroups(groupList)
 
     }
 

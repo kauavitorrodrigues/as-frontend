@@ -1,6 +1,5 @@
 import React, { createContext, useContext, ReactNode, useEffect, useState } from 'react';
 import { useFilter } from '@/contexts/filterContext';
-import { mockEvents } from '@/api/mockData';
 import { Event } from '@/types/Event';
 import * as api from "@/api/admin";
 
@@ -24,17 +23,9 @@ export const EventsProvider = ({ children} : Props ) => {
 	const fetchEvents = async () => {
 
         setLoading(true)
-
-        if (process.env.NODE_ENV === 'development') {
-            setTimeout(() => {
-                setEvents(mockEvents)    
-                setLoading(false)
-            }, 1000)
-        } else {
-            const eventList = await api.getEvents()
-            setEvents(eventList)
-            setLoading(false)
-        }
+        const eventList = await api.getEvents()
+        setEvents(eventList)
+        setLoading(false)
         
 	}
 	

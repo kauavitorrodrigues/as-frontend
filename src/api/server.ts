@@ -1,18 +1,21 @@
-import { getCookie } from "cookies-next"
 import { req } from "./axios"
+import { cookies } from "next/headers"
 
 const getAdminLoggedCookie = async () => {
 
-    const token = getCookie("token")
+    const token = cookies().get("token")
+
     if (!token) {
         throw new Error("Token não encontrado")
     }
 
-    return req.get("/admin/ping", {
+    const isLogged = await req.get("/admin/ping", {
         headers: {
-            "Authorization": `Token ${token}`
+            "Authorization": `Bearer ${token.value}`
         }
     })
+    
+    return isLogged.data.logged
 
 }
 

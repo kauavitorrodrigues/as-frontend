@@ -54,7 +54,7 @@ export const EditPersonForm = ({ event, person, group, refreshPeople } : Props )
             useDisplayAlertToast(
                 ( updatePerson ? true : false ),
                 "Pessoa atualizada com sucesso.",
-                "Houve um problema ao atualizar a pessoa, tente novamente mais tarde."
+                "Sucesso ao atualizar as informações da pessoa!"
             )
 
             updatePerson && refreshPeople()

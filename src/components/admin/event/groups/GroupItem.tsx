@@ -25,7 +25,7 @@ export const GroupItem = ({ event, group, refreshGroups } : Props ) => {
             useDisplayAlertToast(
                 isSuccess,
                 "Grupo excluído com sucesso.",
-                "Houve um problema ao excluir o grupo, tente novamente mais tarde."
+                "O grupo foi excluído com sucesso.",
             )
 
             if (isSuccess) refreshGroups()

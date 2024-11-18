@@ -14,7 +14,7 @@ import { useDisplayAlertToast } from "@/hooks/useDisplayAlertToast"
 import { useEvents } from "@/contexts/eventsContext"
 
 const formSchema = z.object({
-    tittle: z.string().min(1, "O título não pode estar vazio"),
+    title: z.string().min(1, "O título não pode estar vazio"),
     description: z.string().min(1, "A descrição não pode estar vazia"),
     grouped: z.boolean()
 })
@@ -27,7 +27,7 @@ export const EventCreateForm = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            tittle: "",
+            title: "",
             description: "",
             grouped: false
         },
@@ -41,7 +41,7 @@ export const EventCreateForm = () => {
             useDisplayAlertToast(
                 isSuccess,
                 "Evento criado com sucesso.",
-                "Houve um problema ao criar o evento, tente novamente mais tarde."
+                "Seu evento foi criado com sucesso!"
             )
 
             isSuccess && fetchEvents()
@@ -71,7 +71,7 @@ export const EventCreateForm = () => {
 
                 <FormField
                     control={form.control}
-                    name="tittle"
+                    name="title"
                     render={({ field }) => (
 
                         <FormItem>
